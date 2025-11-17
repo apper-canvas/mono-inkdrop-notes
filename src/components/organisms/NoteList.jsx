@@ -157,9 +157,10 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                       </span>
                     )}
                   </div>
-                )}
+)}
 
-<div className="flex items-center justify-between text-xs text-stone-500">
+                {/* Meta information */}
+                <div className="flex items-center justify-between text-xs text-stone-500 pt-3 border-t border-stone-100">
                   <span>
                     {note.notebook?.name}
                   </span>
@@ -167,25 +168,25 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                     {formatDateSafe(note.updatedAt)} ago
                   </span>
                 </div>
-              </div>
 
-              {/* Meta information */}
-{/* Meta information */}
-              <div className="flex items-center gap-3 text-xs text-stone-500 pt-3 border-t border-stone-100">
-                {hasImages && (
-                  <span className="flex items-center gap-1">
-                    <ApperIcon name="Image" size={12} />
-                    {note.images.length}
-                  </span>
-                )}
-                {hasAttachments && (
-                  <span className="flex items-center gap-1">
-                    <ApperIcon name="Paperclip" size={12} />
-                    {note.attachments.length}
-                  </span>
-                )}
+                {/* Additional metadata with icons */}
+                <div className="flex items-center gap-3 text-xs text-stone-500 pt-2">
+                  {hasImages && (
+                    <span className="flex items-center gap-1">
+                      <ApperIcon name="Image" size={12} />
+                      {note.images.length}
+                    </span>
+                  )}
+                  {hasAttachments && (
+                    <span className="flex items-center gap-1">
+                      <ApperIcon name="Paperclip" size={12} />
+                      {note.attachments.length}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
+          );
         })}
       </div>
     </div>
