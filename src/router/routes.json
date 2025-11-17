@@ -1,0 +1,98 @@
+{
+  "/": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/new": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/note/:id": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/search": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/recent": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/tags": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/trash": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  },
+  "/notebook/:notebookId": {
+    "allow": {
+      "when": {
+        "conditions": [
+          {
+            "label": "Public access",
+            "rule": "public"
+          }
+        ]
+      }
+    }
+  }
+}

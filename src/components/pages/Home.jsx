@@ -31,8 +31,8 @@ const Home = () => {
     try {
       setLoading(true);
       setError("");
-      const data = await noteService.getAll();
-      setNotes(data);
+const data = await noteService.getAll();
+      setNotes(data || []);
     } catch (err) {
       setError(err.message || "Failed to load notes");
       console.error("Error loading notes:", err);
@@ -47,10 +47,10 @@ const Home = () => {
     // Filter by search query
     if (searchQuery.trim()) {
       const query = searchQuery.toLowerCase();
-      filtered = filtered.filter(note => 
-        note.title.toLowerCase().includes(query) ||
-        note.content.toLowerCase().includes(query) ||
-        note.tags.some(tag => tag.toLowerCase().includes(query))
+filtered = filtered.filter(note => 
+        (note.title_c || "").toLowerCase().includes(query) ||
+        (note.content_c || "").toLowerCase().includes(query) ||
+        (note.tags_c || []).some(tag => (tag || "").toLowerCase().includes(query))
       );
     }
 
@@ -58,15 +58,15 @@ const Home = () => {
     filtered.sort((a, b) => {
       switch (sortBy) {
         case "created":
-          return new Date(b.createdAt) - new Date(a.createdAt);
+return new Date(b.CreatedOn) - new Date(a.CreatedOn);
         case "updated":
-          return new Date(b.updatedAt) - new Date(a.updatedAt);
+          return new Date(b.ModifiedOn) - new Date(a.ModifiedOn);
         case "title":
-          return a.title.localeCompare(b.title);
+          return (a.title_c || "").localeCompare(b.title_c || "");
         case "pinned":
-          if (a.isPinned && !b.isPinned) return -1;
-          if (!a.isPinned && b.isPinned) return 1;
-          return new Date(b.updatedAt) - new Date(a.updatedAt);
+          if (a.isPinned_c && !b.isPinned_c) return -1;
+          if (!a.isPinned_c && b.isPinned_c) return 1;
+          return new Date(b.ModifiedOn) - new Date(a.ModifiedOn);
         default:
           return new Date(b.updatedAt) - new Date(a.updatedAt);
       }
@@ -106,7 +106,7 @@ const Home = () => {
           <div>
             <h1 className="text-2xl font-bold text-stone-800 mb-1">All Notes</h1>
             <p className="text-stone-600">
-              {filteredNotes.length} {filteredNotes.length === 1 ? "note" : "notes"}
+{filteredNotes.length} {filteredNotes.length === 1 ? "note" : "notes"}
             </p>
           </div>
           
@@ -190,7 +190,7 @@ const Home = () => {
         ) : (
           <div className="h-full overflow-y-auto">
             <NoteList 
-              notes={filteredNotes}
+notes={filteredNotes}
               viewMode={viewMode}
             />
           </div>

@@ -21,8 +21,8 @@ const Recent = () => {
     try {
       setLoading(true);
       setError("");
-      const data = await noteService.getRecent(20);
-      setNotes(data);
+const data = await noteService.getRecent(20);
+      setNotes(data || []);
     } catch (err) {
       setError(err.message || "Failed to load recent notes");
       console.error("Error loading recent notes:", err);
@@ -62,7 +62,7 @@ const Recent = () => {
           <div>
             <h1 className="text-2xl font-bold text-stone-800 mb-1">Recent Notes</h1>
             <p className="text-stone-600">
-              {notes.length} recently edited {notes.length === 1 ? "note" : "notes"}
+{notes.length} recently edited {notes.length === 1 ? "note" : "notes"}
             </p>
           </div>
           
@@ -88,7 +88,7 @@ const Recent = () => {
           />
         ) : (
           <div className="h-full overflow-y-auto">
-            <NoteList notes={notes} viewMode="list" />
+<NoteList notes={notes} viewMode="list" />
           </div>
         )}
       </div>

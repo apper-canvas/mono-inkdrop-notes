@@ -17,13 +17,13 @@ const NoteEditor = () => {
   const navigate = useNavigate();
   const isNewNote = !noteId;
 
-  const [note, setNote] = useState({
-    title: "",
-    content: "",
-    notebookId: 1,
-    tags: [],
-    images: [],
-    attachments: []
+const [note, setNote] = useState({
+    title_c: "",
+    content_c: "",
+    notebookId_c: 1,
+    tags_c: [],
+    images_c: [],
+    attachments_c: []
   });
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -40,9 +40,9 @@ const loadNote = async () => {
     try {
       setLoading(true);
       setError("");
-      const data = await noteService.getById(noteId);
-      setNote(data);
-      setLastSaved(data.updatedAt);
+const data = await noteService.getById(noteId);
+      setNote(data || {});
+      setLastSaved(data?.ModifiedOn);
     } catch (err) {
       setError(err.message || "Failed to load note");
       console.error("Error loading note:", err);
@@ -55,24 +55,26 @@ const loadNote = async () => {
     try {
       setSaving(true);
       const noteData = {
-        ...note,
-        content: content || note.content
+...note,
+        content_c: content || note.content_c
       };
-
-let savedNote;
-      if (isNewNote) {
+      let savedNote;
+      if (!noteId) {
         savedNote = await noteService.create(noteData);
-        // Update notebook note count
-        await notebookService.updateNoteCount(noteData.notebookId, 1);
-        navigate(`/note/${savedNote.id}`, { replace: true });
-        toast.success("Note created successfully");
+        await notebookService.updateNoteCount(noteData.notebookId_c, 1);
+        if (savedNote) {
+          navigate(`/note/${savedNote.Id}`, { replace: true });
+          toast.success("Note created successfully");
+        }
       } else {
         savedNote = await noteService.update(noteId, noteData);
         toast.success("Note saved successfully");
       }
 
-      setNote(savedNote);
-      setLastSaved(savedNote.updatedAt);
+      if (savedNote) {
+        setNote(savedNote);
+        setLastSaved(savedNote.ModifiedOn);
+      }
       return savedNote;
     } catch (err) {
       console.error("Error saving note:", err);
@@ -84,25 +86,25 @@ let savedNote;
   };
 
   const handleTitleChange = (e) => {
-    setNote(prev => ({ ...prev, title: e.target.value }));
+setNote(prev => ({ ...prev, title_c: e.target.value }));
   };
 
   const handleContentChange = (content) => {
-    setNote(prev => ({ ...prev, content }));
+setNote(prev => ({ ...prev, content_c: content }));
   };
 
   const handleNotebookChange = (notebookId) => {
-    setNote(prev => ({ ...prev, notebookId }));
+setNote(prev => ({ ...prev, notebookId_c: notebookId }));
   };
 
   const handleAddTag = (e) => {
     if (e.key === "Enter" && tagInput.trim()) {
       e.preventDefault();
       const newTag = tagInput.trim();
-      if (!note.tags.includes(newTag)) {
+if (!(note.tags_c || []).includes(newTag)) {
         setNote(prev => ({
           ...prev,
-          tags: [...prev.tags, newTag]
+          tags_c: [...(prev.tags_c || []), newTag]
         }));
       }
       setTagInput("");
@@ -111,8 +113,8 @@ let savedNote;
 
   const handleRemoveTag = (tagToRemove) => {
     setNote(prev => ({
-      ...prev,
-      tags: prev.tags.filter(tag => tag !== tagToRemove)
+...prev,
+      tags_c: (prev.tags_c || []).filter(tag => tag !== tagToRemove)
     }));
   };
 
@@ -120,8 +122,8 @@ const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this note?")) return;
     
     try {
-      await noteService.delete(noteId);
-      await notebookService.updateNoteCount(note.notebookId, -1);
+await noteService.delete(noteId);
+      await notebookService.updateNoteCount(note.notebookId_c, -1);
       toast.success("Note deleted successfully");
       navigate("/");
     } catch (err) {
@@ -132,8 +134,10 @@ const handleDelete = async () => {
 
 const handleTogglePin = async () => {
     try {
-      const updatedNote = await noteService.togglePin(noteId);
-      setNote(updatedNote);
+const updatedNote = await noteService.togglePin(noteId);
+      if (updatedNote) {
+        setNote(updatedNote);
+      }
       toast.success(updatedNote.isPinned ? "Note pinned" : "Note unpinned");
     } catch (err) {
       console.error("Error toggling pin:", err);
@@ -184,7 +188,7 @@ const handleTogglePin = async () => {
                   <button
                     onClick={handleTogglePin}
                     className={`p-2 rounded-lg transition-all ${
-                      note.isPinned 
+note.isPinned_c
                         ? "bg-amber-100 text-amber-600 hover:bg-amber-200" 
                         : "text-stone-600 hover:bg-stone-100"
                     }`}
@@ -227,7 +231,7 @@ const handleTogglePin = async () => {
             {/* Title */}
             <Input
               label="Title"
-              value={note.title}
+value={note.title_c || ""}
               onChange={handleTitleChange}
               placeholder="Enter note title..."
             />
@@ -238,7 +242,7 @@ const handleTogglePin = async () => {
                 Notebook
               </label>
               <NotebookSelector
-                value={note.notebookId}
+value={note.notebookId_c || 1}
                 onChange={handleNotebookChange}
               />
             </div>
@@ -250,7 +254,7 @@ const handleTogglePin = async () => {
               Tags
             </label>
             <div className="flex flex-wrap gap-2 mb-2">
-              {note.tags.map(tag => (
+{(note.tags_c || []).map(tag => (
                 <span
                   key={tag}
                   className="inline-flex items-center gap-1 px-3 py-1 bg-amber-100 text-amber-800 rounded-full text-sm"
@@ -275,7 +279,7 @@ const handleTogglePin = async () => {
 {/* Metadata */}
           <div className="flex items-center gap-4 text-xs text-stone-500 mt-6">
             <span>
-              Created {formatDateSafe(note.createdAt)} ago
+Created {formatDateSafe(note.CreatedOn)} ago
             </span>
             <span>
               Last saved {formatDateSafe(lastSaved)} ago
@@ -288,7 +292,7 @@ const handleTogglePin = async () => {
       {/* Editor */}
       <div className="flex-1">
         <RichTextEditor
-          content={note.content}
+content={note.content_c || ""}
           onContentChange={handleContentChange}
           onSave={saveNote}
           lastSaved={lastSaved}

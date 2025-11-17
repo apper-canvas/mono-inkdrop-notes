@@ -11,7 +11,7 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
   const [loading, setLoading] = useState(false);
   const handleNoteClick = (note) => {
     if (onNoteSelect) {
-      onNoteSelect(note.Id);
+onNoteSelect(note.Id);
     } else {
       navigate(`/note/${note.Id}`);
     }
@@ -77,14 +77,14 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
         gridView ? "grid grid-cols-1 md:grid-cols-2 gap-4" : "space-y-3"
       )}>
         {notes.map(note => {
-          const previewText = extractTextFromHTML(note.content);
-          const hasImages = note.images && note.images.length > 0;
-          const hasAttachments = note.attachments && note.attachments.length > 0;
+const previewText = extractTextFromHTML(note.content_c || "");
+          const hasImages = note.images_c && note.images_c.length > 0;
+          const hasAttachments = note.attachments_c && note.attachments_c.length > 0;
           const isSelected = selectedNoteId === note.Id;
 
           return (
             <div
-              key={note.Id}
+key={note.Id}
               onClick={() => handleNoteClick(note)}
               className={cn(
                 "bg-white border border-stone-200 rounded-lg p-4 cursor-pointer transition-all duration-200 hover:shadow-md hover:border-stone-300 group",
@@ -99,8 +99,8 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                   gridView ? "w-full h-20 mb-3" : "w-16 h-16"
                 )}>
                   <img 
-                    src={note.images[0].url} 
-                    alt={note.images[0].caption || "Note image"}
+src={note.images_c?.[0]?.url || note.images_c?.[0]} 
+                    alt={note.images_c?.[0]?.caption || "Note image"}
                     className="w-full h-full object-cover"
                   />
                 </div>
@@ -116,10 +116,10 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                     "font-semibold text-stone-800 truncate group-hover:text-amber-700 transition-colors",
                     gridView ? "text-base" : "text-lg"
                   )}>
-                    {note.title}
+{note.title_c || "Untitled"}
                   </h3>
                   <div className="flex items-center gap-1 ml-2 flex-shrink-0">
-                    {note.isPinned && (
+                    {note.isPinned_c && (
                       <ApperIcon name="Pin" size={14} className="text-amber-600" />
                     )}
                     {hasImages && (
@@ -132,7 +132,7 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                 </div>
 
                 {previewText && (
-                  <p className={cn(
+<p className={cn(
                     "text-stone-600 leading-relaxed mb-3",
                     gridView ? "text-sm flex-1" : "text-sm"
                   )}>
@@ -141,9 +141,9 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                 )}
 
                 {/* Tags */}
-                {note.tags && note.tags.length > 0 && (
+{note.tags_c && note.tags_c.length > 0 && (
                   <div className="flex flex-wrap gap-1 mb-3">
-                    {note.tags.slice(0, gridView ? 2 : 3).map(tag => (
+                    {note.tags_c.slice(0, gridView ? 2 : 3).map(tag => (
                       <span
                         key={tag}
                         className="inline-block px-2 py-1 text-xs bg-stone-100 text-stone-600 rounded-full"
@@ -151,9 +151,9 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                         {tag}
                       </span>
                     ))}
-                    {note.tags.length > (gridView ? 2 : 3) && (
+                    {note.tags_c.length > (gridView ? 2 : 3) && (
                       <span className="inline-block px-2 py-1 text-xs text-stone-500">
-                        +{note.tags.length - (gridView ? 2 : 3)} more
+                        +{note.tags_c.length - (gridView ? 2 : 3)} more
                       </span>
                     )}
                   </div>
@@ -162,10 +162,10 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                 {/* Meta information */}
                 <div className="flex items-center justify-between text-xs text-stone-500 pt-3 border-t border-stone-100">
                   <span>
-                    {note.notebook?.name}
+{note.notebook?.name_c || "Notebook"}
                   </span>
                   <span>
-                    {formatDateSafe(note.updatedAt)} ago
+                    {formatDateSafe(note.ModifiedOn)} ago
                   </span>
                 </div>
 
@@ -173,14 +173,14 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                 <div className="flex items-center gap-3 text-xs text-stone-500 pt-2">
                   {hasImages && (
                     <span className="flex items-center gap-1">
-                      <ApperIcon name="Image" size={12} />
-                      {note.images.length}
+<ApperIcon name="Image" size={12} />
+                      {(note.images_c || []).length}
                     </span>
                   )}
                   {hasAttachments && (
                     <span className="flex items-center gap-1">
-                      <ApperIcon name="Paperclip" size={12} />
-                      {note.attachments.length}
+<ApperIcon name="Paperclip" size={12} />
+                      {(note.attachments_c || []).length}
                     </span>
                   )}
                 </div>

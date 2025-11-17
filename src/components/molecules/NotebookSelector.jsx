@@ -24,8 +24,7 @@ const NotebookSelector = ({ value, onChange, className = "" }) => {
     }
   };
 
-  const selectedNotebook = notebooks.find(n => n.Id === value);
-
+const selectedNotebook = notebooks.find(n => n.Id === value);
   return (
     <div className={cn("relative", className)}>
       <button
@@ -34,13 +33,13 @@ const NotebookSelector = ({ value, onChange, className = "" }) => {
       >
         <div className="flex items-center gap-3">
           {selectedNotebook ? (
-            <>
+<>
               <div 
                 className="w-4 h-4 rounded-full"
-                style={{ backgroundColor: selectedNotebook.color }}
+                style={{ backgroundColor: selectedNotebook.color_c }}
               />
               <span className="font-medium text-stone-800">
-                {selectedNotebook.name}
+                {selectedNotebook.name_c}
               </span>
             </>
           ) : (
@@ -63,7 +62,7 @@ const NotebookSelector = ({ value, onChange, className = "" }) => {
           ) : (
             <div className="py-1">
               {notebooks.map(notebook => (
-                <button
+<button
                   key={notebook.Id}
                   onClick={() => {
                     onChange(notebook.Id);
@@ -71,15 +70,15 @@ const NotebookSelector = ({ value, onChange, className = "" }) => {
                   }}
                   className="flex items-center gap-3 w-full px-4 py-2 text-left hover:bg-stone-50 transition-colors duration-150"
                 >
-                  <div 
+<div 
                     className="w-4 h-4 rounded-full"
-                    style={{ backgroundColor: notebook.color }}
+                    style={{ backgroundColor: notebook.color_c }}
                   />
                   <span className="font-medium text-stone-800">
-                    {notebook.name}
+                    {notebook.name_c}
                   </span>
                   <span className="ml-auto text-xs text-stone-500">
-                    {notebook.noteCount} notes
+                    0 notes
                   </span>
                 </button>
               ))}

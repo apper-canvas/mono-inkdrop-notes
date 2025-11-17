@@ -28,7 +28,7 @@ const Search = () => {
 
   const loadRecentNotes = async () => {
     try {
-      const notes = await noteService.getRecent(8);
+const notes = await noteService.getRecent(8);
       setRecentNotes(notes);
     } catch (error) {
       console.error("Error loading recent notes:", error);
@@ -40,7 +40,7 @@ const Search = () => {
 
     try {
       setLoading(true);
-      const results = await noteService.search(searchQuery);
+const results = await noteService.search(searchQuery);
       setSearchResults(results);
       setHasSearched(true);
     } catch (error) {

@@ -33,13 +33,13 @@ const Tags = () => {
   const loadNotes = async () => {
     try {
       setLoading(true);
-      const notes = await noteService.getAll();
-      setAllNotes(notes);
+const notes = await noteService.getAll();
+      setAllNotes(notes || []);
       
       // Extract all unique tags
       const allTags = new Set();
-      notes.forEach(note => {
-        note.tags.forEach(tag => allTags.add(tag));
+notes.forEach(note => {
+        (note.tags_c || []).forEach(tag => allTags.add(tag));
       });
       
       // Convert to array with counts
@@ -111,7 +111,7 @@ const Tags = () => {
               </span>
             </button>
             
-            {tags.map(tag => (
+{tags.map(tag => (
               <button
                 key={tag.name}
                 onClick={() => setSelectedTag(tag.name)}

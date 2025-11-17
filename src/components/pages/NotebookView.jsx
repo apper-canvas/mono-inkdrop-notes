@@ -43,8 +43,8 @@ const NotebookView = () => {
     try {
       setLoading(true);
       setError("");
-      const data = await noteService.getByNotebook(notebookId);
-      setNotes(data);
+const data = await noteService.getByNotebook(notebookId);
+      setNotes(data || []);
     } catch (err) {
       setError(err.message || "Failed to load notes");
       console.error("Error loading notes:", err);
@@ -60,10 +60,10 @@ const NotebookView = () => {
     }
 
     const query = searchQuery.toLowerCase();
-    const filtered = notes.filter(note => 
-      note.title.toLowerCase().includes(query) ||
-      note.content.toLowerCase().includes(query) ||
-      note.tags.some(tag => tag.toLowerCase().includes(query))
+const filtered = notes.filter(note => 
+      (note.title_c || "").toLowerCase().includes(query) ||
+      (note.content_c || "").toLowerCase().includes(query) ||
+      (note.tags_c || []).some(tag => (tag || "").toLowerCase().includes(query))
     );
     setFilteredNotes(filtered);
   };
@@ -100,18 +100,18 @@ const NotebookView = () => {
       <div className="flex-shrink-0 p-6 border-b border-stone-200 bg-white">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            {notebook && (
+{notebook && (
               <div 
                 className="w-6 h-6 rounded-full flex-shrink-0"
-                style={{ backgroundColor: notebook.color }}
+                style={{ backgroundColor: notebook.color_c }}
               />
             )}
             <div>
-              <h1 className="text-2xl font-bold text-stone-800 mb-1">
-                {notebook?.name || "Notebook"}
+<h1 className="text-2xl font-bold text-stone-800 mb-1">
+                {notebook?.name_c || "Notebook"}
               </h1>
               <p className="text-stone-600">
-                {filteredNotes.length} {filteredNotes.length === 1 ? "note" : "notes"}
+{filteredNotes.length} {filteredNotes.length === 1 ? "note" : "notes"}
                 {searchQuery && ` matching "${searchQuery}"`}
               </p>
             </div>
@@ -185,7 +185,7 @@ const NotebookView = () => {
         ) : (
           <div className="h-full overflow-y-auto">
             <NoteList 
-              notes={filteredNotes}
+notes={filteredNotes}
               viewMode={viewMode}
             />
           </div>

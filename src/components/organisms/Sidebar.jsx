@@ -25,8 +25,8 @@ const Sidebar = ({ isOpen, onClose }) => {
   const loadNotebooks = async () => {
     try {
       setLoading(true);
-      const data = await notebookService.getAll();
-      setNotebooks(data);
+const data = await notebookService.getAll();
+      setNotebooks(data || []);
     } catch (error) {
       console.error("Error loading notebooks:", error);
       toast.error("Failed to load notebooks");
@@ -40,9 +40,9 @@ const Sidebar = ({ isOpen, onClose }) => {
     if (!newNotebookName.trim()) return;
 
     try {
-      const newNotebook = await notebookService.create({
-        name: newNotebookName.trim(),
-        color: newNotebookColor
+const newNotebook = await notebookService.create({
+        name_c: newNotebookName.trim(),
+        color_c: newNotebookColor
       });
       setNotebooks([...notebooks, newNotebook]);
       setNewNotebookName("");
@@ -232,10 +232,10 @@ const Sidebar = ({ isOpen, onClose }) => {
             ) : (
               notebooks.map(notebook => (
                 <NavLink
-                  key={notebook.Id}
+key={notebook.Id}
                   to={`/notebook/${notebook.Id}`}
                   className={({ isActive }) => cn(
-                    "flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 group",
+"flex items-center gap-3 px-4 py-2 rounded-lg transition-all duration-200 group",
                     isActive 
                       ? "bg-white text-stone-800 shadow-sm border border-stone-200" 
                       : "text-stone-600 hover:bg-stone-100"
@@ -243,11 +243,11 @@ const Sidebar = ({ isOpen, onClose }) => {
                 >
                   <div 
                     className="w-4 h-4 rounded-full flex-shrink-0"
-                    style={{ backgroundColor: notebook.color }}
+style={{ backgroundColor: notebook.color_c }}
                   />
-                  <span className="font-medium truncate flex-1">{notebook.name}</span>
+<span className="font-medium truncate flex-1">{notebook.name_c}</span>
                   <span className="text-xs text-stone-500 group-hover:text-stone-600">
-                    {notebook.noteCount}
+0
                   </span>
                 </NavLink>
               ))
