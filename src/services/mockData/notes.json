@@ -1,0 +1,167 @@
+[
+  {
+    "Id": 1,
+    "notebookId": 1,
+    "title": "Weekend Garden Project",
+    "content": "<h2>Garden Planning for Spring</h2><p>Planning out the vegetable garden for this spring. Need to consider:</p><ul><li>Tomato varieties - cherry and beefsteak</li><li>Herb section - basil, thyme, rosemary</li><li>Companion planting strategies</li></ul><p>The south-facing wall gets 8+ hours of sun, perfect for tomatoes.</p>",
+    "images": [
+      {
+        "id": "img_1",
+        "url": "/api/placeholder/400/300",
+        "caption": "Current garden bed layout",
+        "size": 245760,
+        "uploadedAt": "2024-01-28T14:30:00Z"
+      }
+    ],
+    "attachments": [
+      {
+        "id": "att_1",
+        "name": "Garden_Plan_2024.pdf",
+        "type": "pdf",
+        "url": "/documents/garden-plan.pdf",
+        "size": 1048576,
+        "uploadedAt": "2024-01-28T14:32:00Z"
+      }
+    ],
+    "tags": ["gardening", "spring", "planning"],
+    "isPinned": true,
+    "createdAt": "2024-01-28T14:15:00Z",
+    "updatedAt": "2024-01-29T09:22:00Z"
+  },
+  {
+    "Id": 2,
+    "notebookId": 2,
+    "title": "Q1 Marketing Strategy",
+    "content": "<h1>Q1 Marketing Strategy</h1><h3>Objectives</h3><p>Increase brand awareness by 25% through:</p><ul><li>Social media campaigns</li><li>Content marketing</li><li>Partnership collaborations</li></ul><h3>Budget Allocation</h3><p>Total budget: $50,000</p><ul><li>Social media ads: $20,000</li><li>Content creation: $15,000</li><li>Events & partnerships: $15,000</li></ul>",
+    "images": [],
+    "attachments": [
+      {
+        "id": "att_2",
+        "name": "Q1_Budget_Analysis.xlsx",
+        "type": "xlsx",
+        "url": "/documents/budget-analysis.xlsx",
+        "size": 524288,
+        "uploadedAt": "2024-01-27T16:45:00Z"
+      }
+    ],
+    "tags": ["marketing", "strategy", "Q1"],
+    "isPinned": false,
+    "createdAt": "2024-01-27T16:00:00Z",
+    "updatedAt": "2024-01-27T17:30:00Z"
+  },
+  {
+    "Id": 3,
+    "notebookId": 3,
+    "title": "Machine Learning Paper Review",
+    "content": "<h2>Deep Learning for Natural Language Processing</h2><p><strong>Paper:</strong> \"Attention Is All You Need\" - Vaswani et al.</p><h3>Key Insights</h3><ul><li>Transformer architecture eliminates need for recurrence</li><li>Self-attention mechanism allows parallel processing</li><li>Positional encoding maintains sequence information</li></ul><blockquote>The Transformer model achieves superior performance while being more parallelizable and requiring significantly less time to train.</blockquote>",
+    "images": [
+      {
+        "id": "img_2",
+        "url": "/api/placeholder/500/400",
+        "caption": "Transformer architecture diagram",
+        "size": 389120,
+        "uploadedAt": "2024-01-26T11:15:00Z"
+      }
+    ],
+    "attachments": [
+      {
+        "id": "att_3",
+        "name": "transformer_paper.pdf",
+        "type": "pdf",
+        "url": "/documents/transformer-paper.pdf",
+        "size": 2097152,
+        "uploadedAt": "2024-01-26T10:30:00Z"
+      }
+    ],
+    "tags": ["ML", "transformers", "NLP"],
+    "isPinned": true,
+    "createdAt": "2024-01-26T10:00:00Z",
+    "updatedAt": "2024-01-26T12:45:00Z"
+  },
+  {
+    "Id": 4,
+    "notebookId": 4,
+    "title": "Team Standup - Jan 25",
+    "content": "<h3>Daily Standup Meeting</h3><p><strong>Date:</strong> January 25, 2024</p><p><strong>Attendees:</strong> Sarah, Mike, Jessica, David</p><h3>Updates</h3><ul><li><strong>Sarah:</strong> Completed user authentication module, starting on dashboard</li><li><strong>Mike:</strong> Fixed payment gateway integration issues</li><li><strong>Jessica:</strong> Finished UI mockups for settings page</li><li><strong>David:</strong> Working on database optimization</li></ul><h3>Blockers</h3><ul><li>Need API documentation from third-party service</li><li>Waiting for design approval on checkout flow</li></ul>",
+    "images": [],
+    "attachments": [],
+    "tags": ["standup", "team", "meeting"],
+    "isPinned": false,
+    "createdAt": "2024-01-25T09:00:00Z",
+    "updatedAt": "2024-01-25T09:30:00Z"
+  },
+  {
+    "Id": 5,
+    "notebookId": 5,
+    "title": "Europe Trip Itinerary",
+    "content": "<h1>European Adventure - Summer 2024</h1><h3>Cities to Visit</h3><ol><li><strong>Paris, France</strong> (July 1-5)<ul><li>Louvre Museum</li><li>Eiffel Tower</li><li>Montmartre district</li></ul></li><li><strong>Barcelona, Spain</strong> (July 6-9)<ul><li>Sagrada Familia</li><li>Park Güell</li><li>Gothic Quarter</li></ul></li><li><strong>Rome, Italy</strong> (July 10-14)<ul><li>Colosseum</li><li>Vatican Museums</li><li>Trevi Fountain</li></ul></li></ol>",
+    "images": [
+      {
+        "id": "img_3",
+        "url": "/api/placeholder/600/400",
+        "caption": "Barcelona architecture inspiration",
+        "size": 456789,
+        "uploadedAt": "2024-01-24T15:20:00Z"
+      }
+    ],
+    "attachments": [
+      {
+        "id": "att_4",
+        "name": "Flight_Bookings.pdf",
+        "type": "pdf",
+        "url": "/documents/flights.pdf",
+        "size": 675840,
+        "uploadedAt": "2024-01-24T15:25:00Z"
+      }
+    ],
+    "tags": ["travel", "europe", "vacation"],
+    "isPinned": false,
+    "createdAt": "2024-01-24T15:00:00Z",
+    "updatedAt": "2024-01-24T16:10:00Z"
+  },
+  {
+    "Id": 6,
+    "notebookId": 1,
+    "title": "Recipe Collection",
+    "content": "<h2>Favorite Recipes</h2><h3>Grandma's Chocolate Chip Cookies</h3><p><strong>Ingredients:</strong></p><ul><li>2¼ cups all-purpose flour</li><li>1 tsp baking soda</li><li>1 tsp salt</li><li>1 cup butter, softened</li><li>¾ cup granulated sugar</li><li>¾ cup brown sugar</li><li>2 large eggs</li><li>2 tsp vanilla extract</li><li>2 cups chocolate chips</li></ul><p><strong>Instructions:</strong> Preheat oven to 375°F. Mix dry ingredients. Cream butter and sugars, add eggs and vanilla. Combine wet and dry ingredients, fold in chocolate chips. Bake 9-11 minutes.</p>",
+    "images": [],
+    "attachments": [],
+    "tags": ["cooking", "recipes", "desserts"],
+    "isPinned": false,
+    "createdAt": "2024-01-23T19:30:00Z",
+    "updatedAt": "2024-01-23T20:15:00Z"
+  },
+  {
+    "Id": 7,
+    "notebookId": 2,
+    "title": "Client Requirements - Phoenix App",
+    "content": "<h2>Phoenix Mobile App Requirements</h2><p><strong>Client:</strong> Phoenix Fitness</p><p><strong>Deadline:</strong> March 15, 2024</p><h3>Core Features</h3><ul><li>User registration and profiles</li><li>Workout tracking and history</li><li>Social sharing capabilities</li><li>Push notifications for reminders</li><li>Integration with wearable devices</li></ul><h3>Technical Requirements</h3><ul><li>iOS and Android compatibility</li><li>Offline functionality</li><li>Real-time synchronization</li><li>HIPAA compliance for health data</li></ul>",
+    "images": [],
+    "attachments": [
+      {
+        "id": "att_5",
+        "name": "Phoenix_Requirements_v2.docx",
+        "type": "docx",
+        "url": "/documents/phoenix-reqs.docx",
+        "size": 892416,
+        "uploadedAt": "2024-01-22T13:45:00Z"
+      }
+    ],
+    "tags": ["client", "requirements", "mobile"],
+    "isPinned": true,
+    "createdAt": "2024-01-22T13:00:00Z",
+    "updatedAt": "2024-01-22T14:30:00Z"
+  },
+  {
+    "Id": 8,
+    "notebookId": 3,
+    "title": "Quantum Computing Basics",
+    "content": "<h1>Introduction to Quantum Computing</h1><h3>Key Concepts</h3><ul><li><strong>Qubit:</strong> The basic unit of quantum information</li><li><strong>Superposition:</strong> A qubit can exist in multiple states simultaneously</li><li><strong>Entanglement:</strong> Quantum particles can be correlated in ways that classical physics cannot explain</li><li><strong>Quantum Gates:</strong> Operations that manipulate qubits</li></ul><p>Unlike classical bits that are either 0 or 1, qubits can exist in a superposition of both states until measured.</p><h3>Applications</h3><ul><li>Cryptography and security</li><li>Drug discovery and molecular modeling</li><li>Financial modeling and optimization</li><li>Machine learning acceleration</li></ul>",
+    "images": [],
+    "attachments": [],
+    "tags": ["quantum", "computing", "physics"],
+    "isPinned": false,
+    "createdAt": "2024-01-21T16:20:00Z",
+    "updatedAt": "2024-01-21T17:45:00Z"
+  }
+]
