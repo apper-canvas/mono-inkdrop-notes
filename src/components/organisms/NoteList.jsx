@@ -1,18 +1,14 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { formatDateSafe } from "@/utils/formatDateSafe";
+import { noteService } from "@/services/api/noteService";
 import { useNavigate } from "react-router-dom";
-import ApperIcon from "@/components/ApperIcon";
-import { formatDistanceToNow } from "date-fns";
+import { Card } from "@/components/atoms/Card";
 import { cn } from "@/utils/cn";
+import ApperIcon from "@/components/ApperIcon";
 
-const NoteList = ({ 
-  notes = [], 
-  loading = false, 
-  selectedNoteId = null, 
-  onNoteSelect,
-  viewMode = "list" // list or grid
-}) => {
+const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) => {
   const navigate = useNavigate();
-
+  const [loading, setLoading] = useState(false);
   const handleNoteClick = (note) => {
     if (onNoteSelect) {
       onNoteSelect(note.Id);
@@ -163,27 +159,32 @@ const NoteList = ({
                   </div>
                 )}
 
-                {/* Footer */}
-                <div className="flex items-center justify-between text-xs text-stone-500">
+<div className="flex items-center justify-between text-xs text-stone-500">
                   <span>
-                    {formatDistanceToNow(new Date(note.updatedAt))} ago
+                    {note.notebook?.name}
                   </span>
-                  <div className="flex items-center gap-3">
-                    {hasImages && (
-                      <span className="flex items-center gap-1">
-                        <ApperIcon name="Image" size={12} />
-                        {note.images.length}
-                      </span>
-                    )}
-                    {hasAttachments && (
-                      <span className="flex items-center gap-1">
-                        <ApperIcon name="Paperclip" size={12} />
-                        {note.attachments.length}
-                      </span>
-                    )}
-                  </div>
+                  <span>
+                    {formatDateSafe(note.updatedAt)} ago
+                  </span>
                 </div>
               </div>
+
+              {/* Meta information */}
+              <div className="flex items-center gap-3 text-xs text-stone-500 pt-3 border-t border-stone-100">
+                {hasImages && (
+                  <span className="flex items-center gap-1">
+                    <ApperIcon name="Image" size={12} />
+                    {note.images.length}
+                  </span>
+                )}
+                {hasAttachments && (
+                  <span className="flex items-center gap-1">
+                    <ApperIcon name="Paperclip" size={12} />
+                    {note.attachments.length}
+                  </span>
+                )}
+              </div>
+            </div>
             </div>
           );
         })}

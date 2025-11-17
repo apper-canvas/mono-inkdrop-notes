@@ -1,30 +1,25 @@
-import React from "react";
-import { formatDistanceToNow } from "date-fns";
+import React, { useEffect, useState } from "react";
+import { formatDateSafe } from "@/utils/formatDateSafe";
 import { cn } from "@/utils/cn";
 import ApperIcon from "@/components/ApperIcon";
 
-const AutoSaveIndicator = ({
-  isSaving = false,
-  hasUnsavedChanges = false,
-  lastSaved = null,
-  className = ''
-}) => {
-  const getStatusText = () => {
-    if (isSaving) return "Saving...";
-    if (hasUnsavedChanges) return "Unsaved changes";
-    if (lastSaved) return `Saved ${formatDistanceToNow(new Date(lastSaved))} ago`;
-    return "Not saved";
-  };
-
+const AutoSaveIndicator = ({ lastSaved, isSaving = false, hasUnsavedChanges = false, className = "" }) => {
   const getStatusColor = () => {
-    if (isSaving) return "text-amber-600";
+    if (isSaving) return "text-amber-500";
     if (hasUnsavedChanges) return "text-orange-600";
     if (lastSaved) return "text-green-600";
     return "text-stone-500";
   };
 
+  const getStatusText = () => {
+    if (isSaving) return "Saving...";
+    if (hasUnsavedChanges) return "Unsaved changes";
+    if (!lastSaved) return "Not saved";
+    return `Saved ${formatDateSafe(lastSaved)} ago`;
+  };
+
   return (
-    <div className={cn(`flex items-center gap-2 text-xs ${getStatusColor()}`, className)}>
+    <div className={cn("flex items-center gap-2 text-xs", getStatusColor(), className)}>
       {isSaving ? (
         <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse-dot" />
       ) : hasUnsavedChanges ? (
@@ -36,7 +31,8 @@ const AutoSaveIndicator = ({
       )}
       <span className="font-medium">{getStatusText()}</span>
     </div>
-);
+  );
+};
 };
 
 /**

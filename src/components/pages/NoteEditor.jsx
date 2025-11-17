@@ -1,20 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import Input from "@/components/atoms/Input";
-import RichTextEditor from "@/components/organisms/RichTextEditor";
-import NotebookSelector from "@/components/molecules/NotebookSelector";
-import ApperIcon from "@/components/ApperIcon";
-import Loading from "@/components/ui/Loading";
-import ErrorView from "@/components/ui/ErrorView";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import { formatDateSafe } from "@/utils/formatDateSafe";
 import { noteService } from "@/services/api/noteService";
 import { notebookService } from "@/services/api/notebookService";
 import { toast } from "react-toastify";
-import { formatDistanceToNow } from "date-fns";
+import ApperIcon from "@/components/ApperIcon";
+import NotebookSelector from "@/components/molecules/NotebookSelector";
+import Loading from "@/components/ui/Loading";
+import ErrorView from "@/components/ui/ErrorView";
+import Tags from "@/components/pages/Tags";
+import RichTextEditor from "@/components/organisms/RichTextEditor";
+import Input from "@/components/atoms/Input";
 
 const NoteEditor = () => {
-  const { id } = useParams();
+  const { noteId } = useParams();
   const navigate = useNavigate();
-  const isNewNote = !id;
+  const isNewNote = !noteId;
 
   const [note, setNote] = useState({
     title: "",
@@ -34,13 +35,12 @@ const NoteEditor = () => {
     if (!isNewNote) {
       loadNote();
     }
-  }, [id, isNewNote]);
-
-  const loadNote = async () => {
+  }, [noteId, isNewNote]);
+const loadNote = async () => {
     try {
       setLoading(true);
       setError("");
-      const data = await noteService.getById(id);
+      const data = await noteService.getById(noteId);
       setNote(data);
       setLastSaved(data.updatedAt);
     } catch (err) {
@@ -59,15 +59,15 @@ const NoteEditor = () => {
         content: content || note.content
       };
 
-      let savedNote;
+let savedNote;
       if (isNewNote) {
         savedNote = await noteService.create(noteData);
         // Update notebook note count
         await notebookService.updateNoteCount(noteData.notebookId, 1);
-        navigate(`/note/${savedNote.Id}`, { replace: true });
+        navigate(`/note/${savedNote.id}`, { replace: true });
         toast.success("Note created successfully");
       } else {
-        savedNote = await noteService.update(id, noteData);
+        savedNote = await noteService.update(noteId, noteData);
         toast.success("Note saved successfully");
       }
 
@@ -116,11 +116,11 @@ const NoteEditor = () => {
     }));
   };
 
-  const handleDelete = async () => {
+const handleDelete = async () => {
     if (!confirm("Are you sure you want to delete this note?")) return;
     
     try {
-      await noteService.delete(id);
+      await noteService.delete(noteId);
       await notebookService.updateNoteCount(note.notebookId, -1);
       toast.success("Note deleted successfully");
       navigate("/");
@@ -130,9 +130,9 @@ const NoteEditor = () => {
     }
   };
 
-  const handleTogglePin = async () => {
+const handleTogglePin = async () => {
     try {
-      const updatedNote = await noteService.togglePin(id);
+      const updatedNote = await noteService.togglePin(noteId);
       setNote(updatedNote);
       toast.success(updatedNote.isPinned ? "Note pinned" : "Note unpinned");
     } catch (err) {
@@ -272,23 +272,19 @@ const NoteEditor = () => {
               onKeyDown={handleAddTag}
             />
           </div>
-
-          {/* Metadata */}
-          {!isNewNote && (
-            <div className="mt-6 flex items-center gap-6 text-sm text-stone-500">
-              <span>
-                Created {formatDistanceToNow(new Date(note.createdAt))} ago
-              </span>
-              {lastSaved && (
-                <span>
-                  Last saved {formatDistanceToNow(new Date(lastSaved))} ago
-                </span>
-              )}
-            </div>
-          )}
+{/* Metadata */}
+          <div className="flex items-center gap-4 text-xs text-stone-500 mt-6">
+            <span>
+              Created {formatDateSafe(note.createdAt)} ago
+            </span>
+            <span>
+              Last saved {formatDateSafe(lastSaved)} ago
+            </span>
+          </div>
         </div>
       </div>
 
+      {/* Editor */}
       {/* Editor */}
       <div className="flex-1">
         <RichTextEditor
