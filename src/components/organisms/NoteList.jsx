@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { formatDateSafe } from "@/utils/formatDateSafe";
 import { noteService } from "@/services/api/noteService";
 import { useNavigate } from "react-router-dom";
 import { Card } from "@/components/atoms/Card";
 import { cn } from "@/utils/cn";
+import { formatDateSafe } from "@/utils/formatDateSafe";
 import ApperIcon from "@/components/ApperIcon";
 
 const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) => {
@@ -170,6 +170,7 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
               </div>
 
               {/* Meta information */}
+{/* Meta information */}
               <div className="flex items-center gap-3 text-xs text-stone-500 pt-3 border-t border-stone-100">
                 {hasImages && (
                   <span className="flex items-center gap-1">
@@ -185,8 +186,6 @@ const NoteList = ({ notes, viewMode = "list", onNoteSelect, selectedNoteId }) =>
                 )}
               </div>
             </div>
-            </div>
-          );
         })}
       </div>
     </div>

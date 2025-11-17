@@ -31,8 +31,7 @@ const AutoSaveIndicator = ({ lastSaved, isSaving = false, hasUnsavedChanges = fa
       )}
       <span className="font-medium">{getStatusText()}</span>
     </div>
-  );
-};
+);
 };
 
 /**
