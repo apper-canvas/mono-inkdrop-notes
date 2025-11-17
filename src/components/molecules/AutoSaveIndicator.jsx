@@ -1,8 +1,7 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { formatDistanceToNow } from 'date-fns';
-import ApperIcon from '@/components/ApperIcon';
-import { cn } from '@/utils/cn';
+import React from "react";
+import { formatDistanceToNow } from "date-fns";
+import { cn } from "@/utils/cn";
+import ApperIcon from "@/components/ApperIcon";
 
 const AutoSaveIndicator = ({
   isSaving = false,
@@ -37,14 +36,15 @@ const AutoSaveIndicator = ({
       )}
       <span className="font-medium">{getStatusText()}</span>
     </div>
-  );
+);
 };
 
-AutoSaveIndicator.propTypes = {
-  isSaving: PropTypes.bool,
-  hasUnsavedChanges: PropTypes.bool,
-  lastSaved: PropTypes.string,
-  className: PropTypes.string
-};
+/**
+ * AutoSaveIndicator Component
+ * @param {boolean} isSaving - Whether the note is currently being saved
+ * @param {boolean} hasUnsavedChanges - Whether there are unsaved changes
+ * @param {string} lastSaved - ISO timestamp of last save
+ * @param {string} className - Additional CSS classes
+ */
 
 export default AutoSaveIndicator;
